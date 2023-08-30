@@ -8,8 +8,8 @@ export default function Banner () {
             fill={true}
             objectFit='cover'/>
             <div className={styles.bannerText}>
-                <h1>ร่วมฉีดวัคซีน</h1>
-                <h3>ป้องกันโรคภัยไข้เจ็บ</h3>
+                <h1 className='text-4xl font-medium'>Vaccine</h1>
+                <h3 className='text-xl font-serif'>Take care of yourself</h3>
             </div>
         </div>
     )
