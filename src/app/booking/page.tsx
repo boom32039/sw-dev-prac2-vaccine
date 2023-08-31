@@ -1,5 +1,3 @@
-import Banner from "@/components/Banner";
-
 export default function Booking() {
     return (
         <main>
