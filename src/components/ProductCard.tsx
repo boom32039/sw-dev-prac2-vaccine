@@ -1,7 +1,6 @@
 import Image from 'next/image'
 import InteractiveCard from './InteractiveCard';
 import { Rating } from '@mui/material';
-import { useState } from 'react';
 
 export default function ProductCard ({rating, hospitalName, imgSrc, onCompare}:{rating: number|undefined, hospitalName:string, imgSrc:string, onCompare:Function}) {
     return (
@@ -17,9 +16,14 @@ export default function ProductCard ({rating, hospitalName, imgSrc, onCompare}:{
                     {hospitalName}
                 </div>
                 <Rating className="w-full h-[30%] p-[10px]" name="simple-controlled" 
-                value={rating} onChange={(event,newvalue) => {
+                value={rating} 
+                onClick={(e) => {
+                    e.preventDefault(); 
+                    const newvalue = parseInt(e.target.innerText.split(' ')[0]);
                     onCompare(hospitalName, newvalue);
-                }}/>
+                }}
+                
+                />
             </div>
         </InteractiveCard>
     )
