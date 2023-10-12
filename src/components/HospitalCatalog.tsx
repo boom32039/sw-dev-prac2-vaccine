@@ -1,11 +1,9 @@
 import Link from "next/link";
 import ProductCard from "./ProductCard";
-import { useState } from "react";
 
 export default async function HospitalCatalog({hospitalJson} : {hospitalJson:Object}) {
 
     const hospitalList = await hospitalJson;
-    //const [rating , setRating] = useState(0);
     return (
         <>
         Explore {hospitalList.count} models in our HospitalCatalog
