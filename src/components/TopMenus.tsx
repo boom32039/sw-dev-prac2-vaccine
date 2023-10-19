@@ -1,11 +1,22 @@
 import Image from 'next/image'
+import {getServerSession} from 'next-auth'
+import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import { Link } from  '@mui/material'; 
+export default async function TopMenu() {
 
-export default function TopMenu() {
+    const session = await getServerSession(authOptions)
+
     return (
         <div className='flex flex-wrap bg-slate-50  border-gray-200 dark:bg-gray-900'>
             <div >
                 <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-                    <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Hospital</span>
+                    {session? <Link href='/api/auth/signout'>
+                    <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Sign-Out</span>
+                    </Link> :
+                    <Link href='/api/auth/signin'>
+                    <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Sign-In</span>
+                    </Link>
+                    }
                 </div>
             </div>
             
