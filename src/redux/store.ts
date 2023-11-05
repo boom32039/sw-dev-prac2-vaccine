@@ -1,10 +1,22 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import bookingSlice from "./features/bookSlice";
 import { useSelector, TypedUseSelectorHook }from "react-redux"
+import { persistReducer } from 'redux-persist'
+import storage from "redux-persist/lib/storage"
+
+const persistConfig = {
+	key : "rootPersist",
+	storage
+}
+
+const rootReducer = combineReducers({bookingSlice})
+const reduxPersistedReducer = persistReducer(persistConfig, rootReducer)
+
+
 
 export const store = configureStore({
 	reducer: {
-		bookingSlice
+		reduxPersistedReducer
 	}
 });
 

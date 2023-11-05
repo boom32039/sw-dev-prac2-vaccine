@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux"
 import { removeBooking } from "@/redux/features/bookSlice"
 
 export default function BookingCart(){
-    const bookItem = useAppSelector((state)=>state.bookingSlice.bookingItem)
+    const bookItem = useAppSelector((state)=>state.reduxPersistedReducer.bookingSlice.bookingItem)
     const dispatch = useDispatch<AppDispatch>()
     
     if (!bookItem) {
