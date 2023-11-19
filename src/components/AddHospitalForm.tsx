@@ -1,14 +1,27 @@
 import { dbConnect } from "@/db/dbConnect";
+import getHospitals from "@/libs/getHospitals";
 import Hospital from "@/db/models/Hospital";
 import getUserProfile from "@/libs/getUserProfile";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { revalidateTag } from "next/dist/server/web/spec-extension/revalidate-tag";
 import { redirect } from "next/navigation";
-import { TextField, Button } from "@mui/material";
+import { TextField, Button, LinearProgress } from "@mui/material";
+import { Suspense } from "react";
+import HospitalCatalog from "./HospitalCatalog";
 export default async function AddHospitalForm() {
+	const hospitals = getHospitals()
 	const session = await getServerSession(authOptions);
-	if (!session || !session.user.token) return null;
+	if (!session || !session.user.token) 
+	return (
+        <main className="text-center p-5 h-full bg-stone-200 text-black">
+            <h1 className="text-xl font-medium">Select Your Hospital</h1>
+            {/* <CardPanel/> */}
+            <Suspense fallback={ <p>Loading ... <LinearProgress/></p>}>
+                <HospitalCatalog hospitalJson={hospitals}/>
+            </Suspense>
+        </main>
+    )
 	const profile = await getUserProfile(session.user.token);
 	if (profile.data.role != "admin") return <></>;
 

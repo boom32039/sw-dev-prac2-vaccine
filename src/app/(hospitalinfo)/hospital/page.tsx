@@ -7,7 +7,7 @@ import AddHospitalForm from "@/components/AddHospitalForm";
 export default function Hospital() { 
     const hospitals = getHospitals()
     return (
-        <main className="text-center p-5">
+        <main id='hospital-catalog'  className="text-center p-5">
             <h1 className='text-xl font-medium'>Select your favourite hospital</h1>
             <Suspense fallback={<p>Loading...<LinearProgress/></p>}>
             <HospitalCatalog hospitalJson={hospitals}/>
